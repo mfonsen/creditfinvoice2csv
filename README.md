@@ -14,3 +14,5 @@ Columns:
         date: RowDeliveryDate,
         fileName: fileName
  
+Alternatives
+- PDF format invoices contain longer seller name, transaction number
