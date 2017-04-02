@@ -1,0 +1,19 @@
+{
+  "name": "creditfinvoice2csv",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mfonsen/creditfinvoice2csv.git",
+  "author": "Mika Fonsén <mfonsen@users.noreply.github.com>",
+  "license": "Proprietary",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "iconv-lite": "^0.4.15",
+    "lodash": "^4.17.4",
+    "papaparse": "^4.2.0",
+    "standard": "^9.0.2",
+    "xml2js": "^0.4.17"
+  },
+  "devDependencies": {
+    "standard": "^9.0.2"
+  }
+}
