@@ -30,9 +30,10 @@ fs.readdirAsync(BASE_PATH)
   })
   .filter((file) => file.contents !== undefined)
   .map(function (file) {
+    let invoiceTimeStamp = file.contents.Finvoice.MessageTransmissionDetails[0].MessageDetails[0].MessageTimeStamp[0]
     return file.contents.Finvoice.InvoiceRow
       // skips items that are not for bought items
-      .filter((row) => ['Kokonaissaldo', 'Suoritus', 'Viivästyskorko'].indexOf(row.ArticleIdentifier[0]) === -1)
+      .filter((row) => ['Kokonaissaldo', 'Suoritus', 'Viivästyskorko', 'Tilinhoitomaksu', 'ViivÃ€styskorko'].indexOf(row.ArticleIdentifier[0]) === -1)
       .map((row) => {
         let ArticleIdentifierMatch = row.ArticleIdentifier[0].match(ARTICLE_ID_SPLITTER)
         if (!ArticleIdentifierMatch) throw new Error(`'Unknown format in ArticleIdentifier ${row.ArticleIdentifier[0]}`)
@@ -45,7 +46,7 @@ fs.readdirAsync(BASE_PATH)
           amount: parseFloat(row.RowAmount[0]._.replace(',', '.')),
           currency: row.RowAmount[0].$.AmountCurrencyIdentifier.trim(),
           card: row.ArticleName[0],
-          date: moment(row.RowDeliveryDate[0]._),
+          date: moment(row.RowDeliveryDate ? row.RowDeliveryDate[0]._ : invoiceTimeStamp),
           fileName: file.fileName
         }
       })
